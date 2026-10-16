@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f1117;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 22px 8%;
+            border-bottom: 1px solid #292d38;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header span {
+            color: #ff4545;
+        }
+
+        main {
+            width: 90%;
+            max-width: 760px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+        h1 span {
+            color: #ff4545;
+        }
+
+        p {
+            color: #a8adbb;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .downloader {
+            background: #191d27;
+            padding: 25px;
+            border: 1px solid #303544;
+            border-radius: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 17px;
+            border: 1px solid #3b4150;
+            border-radius: 9px;
+            background: #10131a;
+            color: white;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 9px;
+            background: #ff4545;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e52e2e;
+        }
+
+        #message {
+            margin-top: 20px;
+            color: #ffd166;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            text-align: center;
+            color: #777e8e;
+            padding: 25px;
+        }
+
+        @media (max-width: 600px) {
+            main {
+                margin: 65px auto;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .downloader {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>Video<span>Downloader</span></header>
+
+    <main>
+        <h1>Download Videos <span>Simply.</span></h1>
+
+        <p>
+            Paste a direct video file link to get started.
+            Only use videos you own or have permission to download.
+        </p>
+
+        <div class="downloader">
+            <input
+                type="url"
+                id="videoURL"
+                placeholder="Paste a direct video file URL..."
+            >
+
+            <button onclick="downloadVideo()">Download Video</button>
+
+            <div id="message" role="status"></div>
+        </div>
+    </main>
+
+    <footer>© 2026 VideoDownloader | Made with care</footer>
+
+    <script>
+        function downloadVideo() {
+            const url = document.getElementById("videoURL").value.trim();
+            const message = document.getElementById("message");
+
+            if (!url) {
+                message.textContent = "Please paste a video URL first.";
+                return;
+            }
+
+            try {
+                const parsedURL = new URL(url);
+
+                if (parsedURL.protocol !== "https:" &&
+                    parsedURL.protocol !== "http:") {
+                    throw new Error("Invalid protocol");
+                }
+
+                message.textContent =
+                    "Design demo only. Actual downloading must be connected to a supported, authorized video source.";
+            } catch (error) {
+                message.textContent = "Please enter a valid video URL.";
+            }
+        }
+    </script>
+
+</body>
+</html>
